@@ -1,0 +1,78 @@
+/* ========================
+   FLOATING WHATSAPP FAB
+   ======================== */
+
+.wa-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: var(--r-pill);
+  padding: 0.85rem 1.25rem;
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.40);
+  cursor: pointer;
+  text-decoration: none;
+
+  /* hidden by default — revealed via JS after delay */
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  transition: opacity 0.4s ease, transform 0.4s ease,
+    box-shadow 0.3s ease, background 0.3s ease;
+  pointer-events: none;
+}
+
+.wa-fab--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wa-fab:hover {
+  background: #1ebe5d;
+  box-shadow: 0 12px 36px rgba(37, 211, 102, 0.55);
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* Pulse ring */
+.wa-fab__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-pill);
+  border: 2px solid rgba(37, 211, 102, 0.6);
+  animation: pulse-ring 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Icon */
+.wa-fab__icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* Label */
+.wa-fab__label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* Mobile: icon only */
+@media (max-width: 480px) {
+  .wa-fab {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    padding: 0.95rem;
+    border-radius: 50%;
+  }
+
+  .wa-fab__label {
+    display: none;
+  }
+}

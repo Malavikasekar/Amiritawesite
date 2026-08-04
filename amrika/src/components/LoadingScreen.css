@@ -1,0 +1,253 @@
+/* ============================================================
+   LOADING SCREEN — Amirita Water
+   ============================================================ */
+
+/* ── Fullscreen overlay ── */
+.ls {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020617;
+  overflow: hidden;
+  /* Entry: instant */
+  opacity: 1;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Exit: fade + scale up */
+.ls--exit {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+/* ── Radial glow behind brand ── */
+.ls__glow {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(14, 165, 233, 0.18) 0%,
+    rgba(56, 189, 248, 0.10) 40%,
+    transparent 70%
+  );
+  animation: glowPulse 2.6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes glowPulse {
+  from { transform: scale(0.92); opacity: 0.7; }
+  to   { transform: scale(1.08); opacity: 1;   }
+}
+
+/* ── Floating bubbles ── */
+.ls__bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ls__bubble {
+  position: absolute;
+  bottom: -10%;
+  left: calc(6% + var(--i) * 6.8%);
+  width: calc(6px + var(--i) * 2px);
+  height: calc(6px + var(--i) * 2px);
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.20);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  animation: bubbleRise calc(3s + var(--i) * 0.35s) calc(var(--i) * 0.18s)
+             ease-in infinite;
+}
+
+@keyframes bubbleRise {
+  0%   { transform: translateY(0)    scale(1);    opacity: 0;   }
+  10%  { opacity: 1; }
+  80%  { opacity: 0.6; }
+  100% { transform: translateY(-110vh) scale(0.6); opacity: 0;   }
+}
+
+/* ── Centre stage ── */
+.ls__stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── Water drop + splash ── */
+.ls__drop-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.ls__drop {
+  width: 48px;
+  height: 68px;
+  animation: dropFall 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center bottom;
+}
+
+@keyframes dropFall {
+  0%   { transform: translateY(-80px) scale(1);    opacity: 0; }
+  60%  { transform: translateY(8px)   scale(0.88); opacity: 1; }
+  80%  { transform: translateY(-4px)  scale(1.06); }
+  100% { transform: translateY(0)     scale(1);    opacity: 1; }
+}
+
+/* Ripple rings */
+.ls__ripple {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.50);
+  animation: rippleOut 1.2s ease-out forwards;
+}
+
+.ls__ripple--1 { width: 48px;  height: 14px; animation-delay: 0.52s; }
+.ls__ripple--2 { width: 88px;  height: 24px; animation-delay: 0.64s; }
+.ls__ripple--3 { width: 130px; height: 34px; animation-delay: 0.76s; }
+
+@keyframes rippleOut {
+  0%   { transform: translateX(-50%) scale(0);   opacity: 1; }
+  100% { transform: translateX(-50%) scale(1.4); opacity: 0; }
+}
+
+/* ── Brand name ── */
+.ls__brand {
+  position: relative;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  /* stagger: appears after drop lands */
+  animation: brandIn 0.5s 0.45s both;
+}
+
+@keyframes brandIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Shared text style */
+.ls__brand-outline,
+.ls__brand-fill {
+  display: block;
+  font-size: clamp(3.2rem, 10vw, 6.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', sans-serif;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Outline: stroked empty letters */
+.ls__brand-outline {
+  -webkit-text-stroke: 2px rgba(56, 189, 248, 0.45);
+  color: transparent;
+  user-select: none;
+}
+
+/* Filled layer: sits on top, clipped by rising water */
+.ls__brand-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    #38bdf8 0%,
+    #0ea5e9 45%,
+    #0284c7 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Clip mask rises from bottom 0% → 100% over 1.8s */
+  clip-path: inset(100% 0% 0% 0%);
+  animation: waterRise 1.8s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes waterRise {
+  0%   { clip-path: inset(100% 0% 0% 0%); }
+  100% { clip-path: inset(0%   0% 0% 0%); }
+}
+
+/* ── Tagline ── */
+.ls__tagline {
+  display: flex;
+  gap: 0.5rem;
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.85);
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+
+.ls__tag-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: tagUp 0.5s ease forwards;
+}
+.ls__tag-word:nth-child(1) { animation-delay: 1.5s; }
+.ls__tag-word:nth-child(2) { animation-delay: 1.7s; }
+
+@keyframes tagUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Progress wave bar ── */
+.ls__bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  animation: fadeIn 0.4s 1.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.ls__bar {
+  width: 220px;
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(56, 189, 248, 0.12);
+  overflow: hidden;
+  position: relative;
+}
+
+.ls__bar-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  animation: barFill 1.6s 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes barFill {
+  0%   { width: 0%; }
+  60%  { width: 85%; }
+  100% { width: 100%; }
+}
+
+.ls__bar-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(100, 116, 139, 0.8);
+}

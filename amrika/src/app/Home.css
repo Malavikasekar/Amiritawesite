@@ -1,0 +1,303 @@
+/* ========================
+   HOME PAGE
+   ======================== */
+
+/* ── HERO ───────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* Gradient covers the left half so text is always readable */
+  background:
+    linear-gradient(
+      to right,
+      var(--bg-base) 0%,
+      var(--bg-base) 40%,
+      rgba(2, 6, 23, 0.85) 58%,
+      transparent 75%
+    );
+}
+
+/* Ambient blobs */
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero__blob--1 {
+  top: 10%;
+  right: 8%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 700px;
+  max-height: 700px;
+  background: radial-gradient(circle at 55% 45%, rgba(59, 130, 246, 0.20) 0%, transparent 65%);
+}
+
+.hero__blob--2 {
+  bottom: 0;
+  left: 0;
+  width: 40vw;
+  height: 40vw;
+  max-width: 500px;
+  max-height: 500px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 65%);
+}
+
+/* ── The product image: absolutely covers the right half of the viewport ── */
+.hero__visual {
+  position: absolute;
+  inset: 0;
+  left: 30%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Next.js <Image fill> lives inside here */
+.hero__img {
+  object-fit: contain !important;
+  object-position: right center !important;
+  /* Fade left edge into background */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.3) 12%,
+    black 30%,
+    black 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.3) 12%,
+    black 30%,
+    black 100%
+  );
+  /* Fade bottom edge */
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.3) 12%, black 30%, black 100%),
+    linear-gradient(to top, transparent 0%, black 12%, black 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.3) 12%, black 30%, black 100%),
+    linear-gradient(to top, transparent 0%, black 12%, black 100%);
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  /* blue/cyan glow emanating from the product */
+  filter:
+    drop-shadow(0 0 60px rgba(59, 130, 246, 0.30))
+    drop-shadow(0 0 120px rgba(6, 182, 212, 0.15));
+}
+
+
+
+/* ── Text content: sits on top of image via z-index ── */
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 6rem 0 5rem;
+}
+
+/* Content column — left 52% of the container */
+.hero__content {
+  max-width: 52%;
+}
+
+.hero__badge {
+  margin-bottom: 1.75rem;
+}
+
+.hero__title {
+  margin-bottom: 1.5rem;
+}
+
+.hero__sub {
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+}
+
+/* Actions */
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+/* Trust chips */
+.hero__chips {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--r-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  backdrop-filter: blur(8px);
+}
+
+.hero__chip svg { color: var(--aqua); }
+
+/* ── HOW IT WORKS ───────────────────────────── */
+.hiw__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* Image side */
+.hiw__visual { position: relative; }
+
+.hiw__img-wrap {
+  position: relative;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 16 / 10;
+}
+
+.hiw__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Floating badge */
+.hiw__badge {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.hiw__badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--success-dim);
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.hiw__badge-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.hiw__badge-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Content side */
+.hiw__heading { margin-bottom: 1.25rem; }
+.hiw__sub     { margin-bottom: 2.5rem; }
+
+/* Steps */
+.hiw__steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.hiw__step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.hiw__step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px var(--blue-dim);
+}
+
+.hiw__step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.hiw__step-desc { font-size: 0.9rem; }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 960px) {
+  /* On tablet/mobile the image overlays the whole section with reduced opacity */
+  .hero__visual {
+    left: 0;
+    opacity: 0.25;
+  }
+
+  .hero__img {
+    object-position: center center !important;
+  }
+
+  .hero__inner {
+    text-align: center;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .hero__sub, .hero__badge { margin-left: auto; margin-right: auto; }
+  .hero__actions, .hero__chips { justify-content: center; }
+
+  .hiw__inner {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .hiw__badge {
+    right: 0;
+    bottom: -1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__inner { padding: 8rem 0 4rem; }
+  .hero__actions { flex-direction: column; }
+  .hero__actions .btn { width: 100%; justify-content: center; }
+}
+

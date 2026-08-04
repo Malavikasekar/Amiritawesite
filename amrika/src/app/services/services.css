@@ -1,0 +1,94 @@
+/* ========================
+   SERVICES PAGE
+   ======================== */
+
+/* Banner */
+.services__eyebrow   { margin: 0 auto 1.5rem; }
+.services__hero-title { color: var(--text-primary); margin-bottom: 1.25rem; }
+.services__hero-sub   { max-width: 540px; margin: 0 auto; }
+
+/* Cards grid */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+/* Individual card */
+.service-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: var(--ease);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Icon */
+.service-card__icon {
+  background: color-mix(in srgb, var(--card-accent, var(--blue)) 14%, transparent);
+  border-color: color-mix(in srgb, var(--card-accent, var(--blue)) 25%, transparent);
+  color: var(--card-accent, var(--blue));
+  margin-bottom: 0.5rem;
+}
+
+.service-card__title { color: var(--text-primary); }
+.service-card__desc  { font-size: 0.92rem; }
+
+/* Feature list */
+.service-card__features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex-grow: 1;
+}
+
+.service-card__feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.service-card__feature svg { color: var(--success); flex-shrink: 0; }
+
+/* CTA */
+.service-card__cta {
+  margin-top: 0.5rem;
+  justify-content: space-between;
+}
+
+/* Bottom CTA band */
+.services__cta-band {
+  padding: 5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.services__cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.services__cta-title { margin-bottom: 0.75rem; }
+.services__cta-sub   { max-width: 480px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .services__grid    { grid-template-columns: 1fr; }
+  .services__cta-inner { flex-direction: column; text-align: center; }
+  .services__cta-sub { max-width: 100%; }
+  .services__cta-inner .btn { width: 100%; justify-content: center; }
+}

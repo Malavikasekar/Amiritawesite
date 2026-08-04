@@ -1,0 +1,289 @@
+/* =========================================================
+   FOOTER — Amirita Glow Edition
+   ========================================================= */
+
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-surface) 0%, #010410 100%);
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Static aurora orbs (no animation) ─────────────────── */
+.footer__aurora { position: absolute; inset: 0; pointer-events: none; }
+
+.footer__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.10;
+}
+
+.footer__orb--1 {
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+  top: -200px; left: -60px;
+}
+
+.footer__orb--2 {
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, var(--aqua) 0%, transparent 70%);
+  top: -140px; right: -40px;
+}
+
+/* ── Static shimmer border (no animation) ───────────────── */
+.footer__shimmer-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--aqua) 30%,
+    var(--blue) 70%,
+    transparent 100%
+  );
+  opacity: 0.45;
+}
+
+/* ── Inner wrapper ──────────────────────────────────────── */
+.footer__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ══ TOP STRIP (everything static, no hover animations needed) ═════ */
+.footer__strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.6rem 0;
+  flex-wrap: wrap;
+}
+
+/* Logo */
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+
+.footer__logo:hover { opacity: 0.72; }
+
+.footer__logo-orb {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--aqua-dim), var(--blue-dim));
+  border: 1px solid rgba(6, 182, 212, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--aqua);
+}
+
+.footer__logo strong { color: var(--aqua); }
+
+/* Nav */
+.footer__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer__nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer__dot {
+  color: var(--border-hover);
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.footer__nav-link {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.footer__nav-link:hover { color: var(--aqua); }
+
+/* Icon buttons */
+.footer__contacts { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+.footer__icon-btn {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.footer__icon-btn:hover {
+  color: var(--aqua);
+  border-color: rgba(6, 182, 212, 0.35);
+  background: var(--aqua-dim);
+}
+
+/* ══ GIANT WORDMARK — ONLY THIS GLOWS ═══════════════════ */
+.footer__wordmark-wrap {
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 2.5rem;
+  overflow: hidden;
+  /* Soft edge fade */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+/* The ONE animation in the entire footer */
+@keyframes amirita-glow {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0  0px rgba(6, 182, 212, 0.00))
+      drop-shadow(0 0  0px rgba(59, 130, 246, 0.00));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 18px rgba(6, 182, 212, 0.55))
+      drop-shadow(0 0 45px rgba(59, 130, 246, 0.30))
+      drop-shadow(0 0 90px rgba(6, 182, 212, 0.12));
+  }
+}
+
+.footer__wordmark {
+  display: inline-block;
+  font-size: clamp(4rem, 13vw, 11rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1;
+
+  /* Stable gradient fill — never changes */
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.30) 0%,
+    rgba(255, 255, 255, 0.22) 40%,
+    rgba(59, 130, 246, 0.30) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Slow, professional glow — the ONLY animation */
+  animation: amirita-glow 7s ease-in-out infinite;
+}
+
+/* ══ BOTTOM BAR (fully static) ═══════════════════════════ */
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--border);
+  padding: 1rem 0 1.4rem;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.footer__badges { display: flex; gap: 0.4rem; align-items: center; }
+
+.footer__badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--r-pill);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  background: var(--blue-dim);
+  color: var(--blue);
+}
+
+.footer__badge--aqua {
+  border-color: rgba(6, 182, 212, 0.28);
+  background: var(--aqua-dim);
+  color: var(--aqua);
+}
+
+.footer__badge--green {
+  border-color: rgba(16, 185, 129, 0.28);
+  background: var(--success-dim);
+  color: var(--success);
+}
+
+.footer__legal {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-right: 4rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footer__legal {
+    margin-right: 0;
+  }
+}
+
+
+.footer__legal-link { color: var(--text-muted); transition: color 0.2s; }
+.footer__legal-link:hover { color: var(--aqua); }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer__strip {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer__wordmark-wrap {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+}
+
+/* ── Reduced motion — kill even the glow ───────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .footer__wordmark { animation: none; }
+}

@@ -1,0 +1,28 @@
+/* ========================
+   LEGAL PAGES (Privacy & Terms)
+   ======================== */
+
+.legal__title { color: var(--text-primary); margin-bottom: 0.75rem; }
+.legal__sub   { color: var(--text-secondary); }
+
+.legal__content {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.legal__card {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.legal__section-title {
+  color: var(--text-primary);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .legal__card { padding: 2rem 1.5rem; }
+}
